@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Intento {
 
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -23,12 +23,12 @@ public class Intento {
     @Column(name = "fecha_finalizacion", nullable = false)
     private LocalDateTime fechaFinalizacion;
 
-    @Column(name = "calificacion", precision = 50)
+    @Column(name = "calificacion")
     private Double calificacion;
 
-    @Column(name = "comentarios", length = 45)
+    @Column(name = "comentarios", length = 255)
     private String comentarios;
-
+    
     @ManyToOne
     @JoinColumn(name = "idusuario", nullable = false)
     private Usuario usuario;
