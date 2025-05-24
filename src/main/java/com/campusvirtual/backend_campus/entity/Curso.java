@@ -20,5 +20,8 @@ public class Curso {
     private String nombre;
 
     @Column(length = 45)
-    private String descripcion;
+    private String grupo;
+
+    @Column(length = 45)
+    private String carrera;
 }
