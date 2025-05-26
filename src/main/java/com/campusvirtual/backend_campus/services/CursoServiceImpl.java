@@ -14,22 +14,26 @@ import com.campusvirtual.backend_campus.repository.CursoRepository;
 @Service
 public class CursoServiceImpl implements CursoService {
 
-    @Autowired
-    private CursoRepository cursoRepository;
+    private final CursoRepository cursoRepository;
+    private final CursoMapper cursoMapper;
 
     @Autowired
-    private CursoMapper cursoMapper;
+    public CursoServiceImpl(CursoRepository cursoRepository, CursoMapper cursoMapper) {
+        this.cursoRepository = cursoRepository;
+        this.cursoMapper = cursoMapper;
+    }
 
     @Override
     public CursoDTO crearCurso(CursoDTO cursoDTO) {
         Curso curso = cursoMapper.toEntity(cursoDTO);
-        return cursoMapper.toDto(cursoRepository.save(curso));
+        Curso cursoGuardado = cursoRepository.save(curso);
+        return cursoMapper.toDto(cursoGuardado);
     }
 
     @Override
     public CursoDTO obtenerCursoPorId(Integer id) {
         Curso curso = cursoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Curso no encontrado con ID: " + id));
         return cursoMapper.toDto(curso);
     }
 
@@ -43,17 +47,23 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public CursoDTO actualizarCurso(Integer id, CursoDTO cursoDTO) {
         Curso curso = cursoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Curso no encontrado con ID: " + id));
 
         curso.setNombre(cursoDTO.getNombre());
         curso.setGrupo(cursoDTO.getGrupo());
         curso.setCarrera(cursoDTO.getCarrera());
+        curso.setProfesor(cursoDTO.getProfesor());
+        curso.setDescripcion(cursoDTO.getDescripcion());
 
-        return cursoMapper.toDto(cursoRepository.save(curso));
+        Curso cursoActualizado = cursoRepository.save(curso);
+        return cursoMapper.toDto(cursoActualizado);
     }
 
     @Override
     public void eliminarCurso(Integer id) {
+        if (!cursoRepository.existsById(id)) {
+            throw new RuntimeException("No se puede eliminar. Curso no encontrado con ID: " + id);
+        }
         cursoRepository.deleteById(id);
     }
 }

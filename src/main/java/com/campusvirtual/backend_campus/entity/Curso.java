@@ -14,14 +14,20 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idcurso;
+    private Integer id;
 
-    @Column(length = 45)
+    @Column(length = 100)
     private String nombre;
 
-    @Column(length = 45)
+    @Column(length = 20)
     private String grupo;
 
-    @Column(length = 45)
+    @Column(length = 100)
     private String carrera;
+
+    @Column(length = 100)
+    private String profesor;
+
+    @Column(length = 255)
+    private String descripcion;
 }
