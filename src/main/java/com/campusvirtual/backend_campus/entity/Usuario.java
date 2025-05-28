@@ -48,6 +48,8 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    private String sessionId;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (getRol() == null) return Collections.emptyList();
