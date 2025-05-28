@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuarios")
 @Getter
 @Setter
@@ -41,6 +42,4 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Entrega> entregas;
 }
