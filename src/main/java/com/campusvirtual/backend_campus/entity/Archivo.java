@@ -10,12 +10,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArchivoAsignacion {
+public class Archivo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "archivos_asignacion")
-    private Integer id;
+    private Long id;
 
     @Column(name = "nombre", length = 45)
     private String nombre;
@@ -23,7 +22,17 @@ public class ArchivoAsignacion {
     @Column(name = "url", length = 45, nullable = false)
     private String url;
 
+    //relacion con asignacion
     @ManyToOne
-    @JoinColumn(name = "idasignacion", nullable = false)
+    @JoinColumn(name = "id_asignacion", nullable = false)
     private Asignacion asignacion;
+
+    //relacion con entrega
+    @ManyToOne
+    @JoinColumn(name = "id_entrega")
+    private Entrega entrega;
+
+    @ManyToOne
+    @JoinColumn(name = "id_contenido")
+    private Contenido contenido;
 }

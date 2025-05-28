@@ -2,7 +2,9 @@ package com.campusvirtual.backend_campus.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "asignaciones")
@@ -41,10 +43,12 @@ public class Asignacion {
     @JoinColumn(name = "idcurso", nullable = false)
     private Curso curso;
 
+    @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Archivo> archivos;
 
     public enum EstadoAsignacion {
-    PENDIENTE,
-    ENTREGADO,
-    CALIFICADO
- }
+        PENDIENTE,
+        ENTREGADO,
+        CALIFICADO
+    }
 }
