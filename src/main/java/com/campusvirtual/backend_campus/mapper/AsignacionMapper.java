@@ -12,7 +12,6 @@ public interface AsignacionMapper {
     AsignacionDTO toDto(Asignacion asignacion);
 
     @Mapping(source = "idCurso", target = "curso.id")
-    // No seteamos el nombreCurso porque es redundante para la entidad
     @Mapping(target = "curso.nombre", ignore = true)
     Asignacion toEntity(AsignacionDTO dto);
 }
