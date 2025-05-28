@@ -2,15 +2,15 @@ package com.campusvirtual.backend_campus.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "alumnos")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Alumno extends  Usuario {
