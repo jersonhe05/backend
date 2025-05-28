@@ -14,13 +14,13 @@ public class Matricula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idusuarioscurso;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "idcurso", nullable = false)
     private Curso curso;
 
     @ManyToOne
-    @JoinColumn(name = "idusuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "id_alumno", nullable = false)
+    private Alumno alumno;
 }
