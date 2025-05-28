@@ -1,11 +1,9 @@
 package com.campusvirtual.backend_campus.entity;
 
-import com.campusvirtual.backend_campus.entity.util.Profesor;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "cursos")
