@@ -7,7 +7,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,12 @@ import java.util.Date;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class JwtService {
     private final UsuarioRepository usuarioRepository;
+
+    public JwtService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Value("${security.jwt.expiracion-en-minutos}")
     private Long EXPIRATION_EN_MINUTOS;
@@ -66,7 +68,7 @@ public class JwtService {
         String correo = extractCorreo(token);
         String sessionIdFromToken = extractSessionId(token);
 
-        Usuario u = usuarioRepository.findByCorreoEqualsIgnoreCase(correo)
+        Usuario u = usuarioRepository.findByEmailEqualsIgnoreCase(correo)
                 .orElseThrow(() -> new UsuarioNotFoundException("Persona no encontrada"));
 
         return correo.equals(usuario.getUsername()) && sessionIdFromToken.equals(u.getSessionId());
