@@ -13,7 +13,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario getUsuarioByCorreo(String correo) {
-        return usuarioRepository.findByCorreoEqualsIgnoreCase(correo)
+        return usuarioRepository.findByEmailEqualsIgnoreCase(correo)
                 .orElseThrow(() -> new UsuarioNotFoundException("Error al obtener el usuario con correo "+correo));
     }
 }
