@@ -20,8 +20,8 @@ public class Cadena {
     @Column(name = "titulo", length = 45)
     private String titulo;
 
-    @Column(name = "cuerpo", length = 200)
-    private String cuerpo;
+    @Column(name = "contenido", length = 200)
+    private String contenido;
 
     @ManyToOne
     @JoinColumn(name = "idusuario", nullable = false)
@@ -30,4 +30,8 @@ public class Cadena {
     @ManyToOne
     @JoinColumn(name = "idforo", nullable = false)
     private Foro foro;
+
+    @ManyToOne
+    @JoinColumn(name = "idcadena_padre")
+    private Cadena cadenaPadre;
 }
