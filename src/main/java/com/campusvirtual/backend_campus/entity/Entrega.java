@@ -2,6 +2,10 @@ package com.campusvirtual.backend_campus.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "entregas")
@@ -24,6 +28,10 @@ public class Entrega {
     @JoinColumn(name = "idusuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "fecha_entrega", nullable = false)
-    private java.time.LocalDate fechaEntrega;
+    @CreationTimestamp
+    private LocalDateTime fechaEntrega;
+
+    @OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Archivo> archivos;
+
 }

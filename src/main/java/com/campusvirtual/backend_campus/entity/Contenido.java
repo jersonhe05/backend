@@ -3,6 +3,8 @@ package com.campusvirtual.backend_campus.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "contenidos")
 @Getter
@@ -30,4 +32,7 @@ public class Contenido {
     @ManyToOne
     @JoinColumn(name = "idcontenido_padre")
     private Contenido contenidoPadre;
+
+    @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Archivo> archivos;
 }

@@ -3,6 +3,7 @@ package com.campusvirtual.backend_campus.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "asignaciones")
@@ -30,4 +31,7 @@ public class Asignacion {
     @ManyToOne
     @JoinColumn(name = "idcurso", nullable = false)
     private Curso curso;
+
+    @OneToMany(mappedBy = "asignacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Archivo> archivos;
 }
