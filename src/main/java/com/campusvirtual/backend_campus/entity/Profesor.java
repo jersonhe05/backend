@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -12,12 +13,12 @@ import java.util.List;
 @Table(name = "profesores")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Profesor extends Usuario {
 
-    @OneToMany(targetEntity = Profesor.class, mappedBy = "profesor", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Curso.class, mappedBy = "profesor", cascade = CascadeType.ALL)
     private List<Curso> cursos;
 
 
