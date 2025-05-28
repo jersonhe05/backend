@@ -40,7 +40,7 @@ public class SecurityBeansInjector {
     @Bean
     public UserDetailsService userDetailsService() {
         return (correo -> {
-            return usuarioRepository.findByCorreoEqualsIgnoreCase(correo)
+            return usuarioRepository.findByEmailEqualsIgnoreCase(correo)
                     .orElseThrow(() -> new UsuarioNotFoundException("Error userDetailsService, Usuario no encontrado"));
 
         });
