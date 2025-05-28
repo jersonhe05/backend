@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-campus
+    environment:
+      POSTGRES_DB: prueba2
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - campus-network
+
+#  backend:
+#    image: backend-campus:latest  # Asegúrate de haber construido esta imagen
+#    container_name: backend-campus
+#    depends_on:
+#      - postgres
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/prueba2
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: 1234
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - campus-network
+
+volumes:
+  postgres_data:
+
+networks:
+  campus-network:
